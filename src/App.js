@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import Details from './Components/Details/Details';
 import useStyles from './styles';
-import Main from './Components/Details/Main';
+import Main from './Components/Main/Main';
 
 const App = () => {
   const classes = useStyles();
