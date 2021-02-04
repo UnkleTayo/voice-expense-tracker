@@ -10,14 +10,16 @@ export const Provider = ({ children }) => {
   // Logic for adding and deleting transations
   const [transactions, dispatch] = useReducer(contextReducer, initialState);
 
-  const deletTransaction = (id) =>
-    dispatch({ type: 'DELETE_TRANSACTIONS', payload: id });
+  const deleteTransaction = (id) =>
+    dispatch({ type: 'DELETE_TRANSACTION', payload: id });
 
-  const addTransaction = (transaction) =>
-    dispatch({ type: 'ADD_TRANSACTIONS', payload: transaction });
+  const addTransaction = (trans) =>
+    dispatch({ type: 'ADD_TRANSACTION', payload: trans });
+
+  console.log(transactions);
   return (
     <ExpenseTrackerContext.Provider
-      value={{ deletTransaction, addTransaction }}
+      value={{ deleteTransaction, addTransaction }}
     >
       {children}
     </ExpenseTrackerContext.Provider>

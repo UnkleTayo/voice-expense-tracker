@@ -24,7 +24,6 @@ const Main = () => {
           variant='subtitle1'
           style={{ lineHeight: '1.5em', marginTop: '20px' }}
         >
-          MANUAL Cde
           {/* <InfoCard /> */}
         </Typography>
         <Divider className={classes.divider} />
