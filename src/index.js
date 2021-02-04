@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
+import {Provider} from './context/context'
 
 import App from './App';
 
-render(<App />, document.getElementById('root'));
+render( <Provider> <App /> </Provider>, document.getElementById('root'));

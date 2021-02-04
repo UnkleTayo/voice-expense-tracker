@@ -6,6 +6,7 @@ import Main from './Components/Main/Main';
 
 const App = () => {
   const classes = useStyles();
+
   return (
     <div>
       <Grid
