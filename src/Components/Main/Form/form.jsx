@@ -35,7 +35,7 @@ const Form = () => {
       amount: Number(formData.amount),
       id: uuidv4(),
     };
-    console.log(transaction);
+    // console.log(transaction);
 
     addTransaction(transaction);
     setFormData(initialState);
@@ -43,7 +43,7 @@ const Form = () => {
 
   const selectedCategory =
     formData.type === 'Income' ? incomeCategories : expenseCategories;
-  console.log(selectedCategory);
+  // console.log(selectedCategory);
 
   return (
     <form onSubmit={createTransaction}>
