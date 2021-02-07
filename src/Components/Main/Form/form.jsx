@@ -18,6 +18,7 @@ import {
   incomeCategories,
   expenseCategories,
 } from '../../../constants/categories';
+import CustomizedSnackbar from '../../Snackbar/Snackbar';
 
 const initialState = {
   amount: '',
@@ -30,9 +31,11 @@ const Form = () => {
   const [formData, setFormData] = useState(initialState);
   const { addTransaction } = useContext(ExpenseTrackerContext);
   const { segment } = useSpeechContext();
+  const [open, setOpen] = useState(false);
 
   const createTransaction = () => {
-    if (Number.isNaN(Number(formData)) || formData.date.includes('-')) return;
+    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes('-'))
+      return;
 
     const transaction = {
       ...formData,
@@ -42,6 +45,7 @@ const Form = () => {
     // console.log(transaction);
 
     addTransaction(transaction);
+    setOpen(true);
     setFormData(initialState);
   };
 
@@ -103,83 +107,78 @@ const Form = () => {
   }, [segment]);
 
   return (
-    <form onSubmit={createTransaction}>
-      <Grid container spacing={2}>
-        {/* <Snackbar open={open} setOpen={setOpen} /> */}
-        <Grid item xs={12}>
-          <Typography align='center' variant='subtitle2' gutterBottom>
-            {segment && (
-              <div className='segment'>
-                {segment.words.map((w) => w.value).join(' ')}
-              </div>
-            )}
-            {/* {isSpeaking ? <BigTranscript /> : 'Start adding transactions'}  */}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <FormControl fullWidth>
-            <InputLabel>Type</InputLabel>
-            <Select
-              value={formData.type}
-              onChange={(e) =>
-                setFormData({ ...formData, type: e.target.value })
-              }
-            >
-              <MenuItem value='Income'>Income</MenuItem>
-              <MenuItem value='Expense'>Expense</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={6}>
-          <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
-            <Select
-              value={formData.category}
-              onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
-              }
-            >
-              {selectedCategory.map((c) => (
-                <MenuItem value={c.type} key={c.type}>
-                  {c.type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            type='number'
-            label='Amount'
-            fullWidth
-            value={formData.amount}
-            onChange={(e) =>
-              setFormData({ ...formData, amount: e.target.value })
-            }
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            fullWidth
-            label='Date'
-            type='date'
-            value={formData.date}
-            onChange={(e) =>
-              setFormData({ ...formData, date: formatDate(e.target.value) })
-            }
-          />
-        </Grid>
-        <Button
-          className={classes.button}
-          variant='outlined'
-          color='primary'
-          fullWidth
-          onClick={createTransaction}
-        >
-          Create
-        </Button>
+    <Grid container spacing={2}>
+      <CustomizedSnackbar open={open} setOpen={setOpen} />
+      {/* <Snackbar open={open} setOpen={setOpen} /> */}
+      <Grid item xs={12}>
+        <Typography align='center' variant='subtitle2' gutterBottom>
+          {segment && (
+            <div className='segment'>
+              {segment.words.map((w) => w.value).join(' ')}
+            </div>
+          )}
+          {/* {isSpeaking ? <BigTranscript /> : 'Start adding transactions'}  */}
+        </Typography>
       </Grid>
-    </form>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel>Type</InputLabel>
+          <Select
+            value={formData.type}
+            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+          >
+            <MenuItem value='Income'>Income</MenuItem>
+            <MenuItem value='Expense'>Expense</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel>Category</InputLabel>
+          <Select
+            value={formData.category}
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
+          >
+            {selectedCategory.map((c) => (
+              <MenuItem value={c.type} key={c.type}>
+                {c.type}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <TextField
+          type='number'
+          label='Amount'
+          fullWidth
+          value={formData.amount}
+          onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+        />
+      </Grid>
+      <Grid item xs={6}>
+        <TextField
+          fullWidth
+          label='Date'
+          type='date'
+          value={formData.date}
+          onChange={(e) =>
+            setFormData({ ...formData, date: formatDate(e.target.value) })
+          }
+        />
+      </Grid>
+      <Button
+        className={classes.button}
+        variant='outlined'
+        color='primary'
+        fullWidth
+        onClick={createTransaction}
+      >
+        Create
+      </Button>
+    </Grid>
   );
 };
 
