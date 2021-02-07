@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f9faf9ea-5988-49e8-9903-4c14095b73d1/deploy-status)](https://app.netlify.com/sites/voiceexpenseapp/deploys)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
