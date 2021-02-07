@@ -4,7 +4,7 @@ import {
   PushToTalkButtonContainer,
   ErrorPanel,
 } from '@speechly/react-ui';
-import { SpeechState, useSpeechContext } from '@speechly/react-ui';
+import { SpeechState, useSpeechContext } from '@speechly/react-client';
 import { Grid } from '@material-ui/core';
 import Details from './Components/Details/Details';
 import useStyles from './styles';
@@ -14,6 +14,7 @@ const App = () => {
   const classes = useStyles();
   const { speechState } = useSpeechContext();
   const main = useRef(null);
+
   const executeScroll = () => main.current.scrollIntoView();
 
   useEffect(() => {
