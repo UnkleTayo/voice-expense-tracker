@@ -20,7 +20,7 @@ const useTransactions = (title) => {
 
   const categories = title === 'Income' ? incomeCategories : expenseCategories;
 
-  console.log(total);
+  // console.log(total);
 
   transactionPerType.forEach((transaction) => {
     const category = categories.find((c) => c.type === transaction.category);

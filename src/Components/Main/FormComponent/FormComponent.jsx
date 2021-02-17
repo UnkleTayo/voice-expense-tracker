@@ -26,7 +26,7 @@ const initialState = {
   type: 'Income',
   date: formatDate(new Date()),
 };
-const Form = () => {
+const FormComponent = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState(initialState);
   const { addTransaction } = useContext(ExpenseTrackerContext);
@@ -58,6 +58,7 @@ const Form = () => {
       if (segment.intent.intent === 'add_expense') {
         setFormData({ ...FormData, type: 'Expense' });
       } else if (segment.intent.intent === 'add_income') {
+        console.log(segment)
         setFormData({ ...FormData, type: 'Income' });
       } else if (
         segment.isFinal &&
@@ -182,4 +183,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormComponent;
